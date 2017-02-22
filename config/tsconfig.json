@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "target": "es5" ,
+    "module": "commonjs" ,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "noEmit": true,
+    "noEmitHelpers": true,
+    "importHelpers": true,
+    "strictNullChecks": false,
+    "lib": [
+      "dom",
+      "es6"
+    ],
+    "typeRoots": [
+      "../node_modules/@types"
+    ],
+    "types": [
+      "hammerjs",
+      "node",
+      "source-map",
+      "webpack"
+    ]
+  },
+  "files": [
+    "../src/typings/custom-typings.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "../node_modules",
+    "www",
+    "../www"
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    "forkChecker": true,
+    "useWebpackText": true
+  },
+  "angularCompilerOptions": {
+    "genDir": "./compiled",
+    "skipMetadataEmit": true
+  },
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
+  }
+}

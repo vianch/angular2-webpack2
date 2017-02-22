@@ -1,0 +1,247 @@
+@import "variables";
+
+// GENERAL MIXINS
+//fonts
+@function calculateRem($size) {
+  $remSize: $size / 15px;
+  @return $remSize * 1.5rem;
+}
+
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+@mixin truncate {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+// Color mixins / Functions
+@function get-color($palette, $hue) {
+  @if map-has-key($palette, $hue) {
+    @return map-get($palette, $hue);
+  }
+}
+
+@function get-contrast($palette, $hue) {
+  @return map-get(map-get($palette, contrast), $hue);
+}
+
+
+//size mixins
+@mixin set-size($width: 0, $height: 0, $isBlock: false, $isclear: false) {
+
+  width: $width;
+  height: $height;
+  @if($isclear) {
+    clear: both;
+  }
+  @if($isBlock) {
+    display: block;
+  }
+}
+
+@mixin flex($values) {
+  -webkit-box-flex: $values;
+  -moz-box-flex:  $values;
+  -webkit-flex:  $values;
+  -ms-flex:  $values;
+  flex:  $values;
+}
+
+@mixin backface-visibility($backface) {
+  -webkit-backface-visibility: $backface; /* Chrome, Safari, Opera */
+  backface-visibility: $backface;
+}
+
+//position mixins
+@mixin centered-box {
+  margin: 0 auto;
+}
+
+@mixin set-position($type: relative, $top: auto, $right: auto, $bottom: auto, $left: auto) {
+  position: $type;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin box-align($align...) {
+  box-align: $align;              /* As specified */
+  -moz-box-align: $align;         /* Mozilla */
+  -webkit-box-align: $align;      /* WebKit */
+}
+
+@mixin box-pack($pack...) {
+  box-align: $pack;              /* As specified */
+  -moz-box-align: $pack;         /* Mozilla */
+  -webkit-box-align: $pack;      /* WebKit */
+}
+
+@mixin box-orient($orient...) {
+  box-align: $orient;              /* As specified */
+  -moz-box-align: $orient;         /* Mozilla */
+  -webkit-box-align: $orient;      /* WebKit */
+}
+
+@mixin box-direction($direction...) {
+  -moz-box-direction: $direction;      /* Mozilla */
+  -webkit-box-direction: $direction;   /* WebKit */
+  box-direction: $direction;           /* As specified */
+}
+
+//transitions mixins
+@mixin transition($transition...) {
+  -moz-transition:    $transition;
+  -o-transition:      $transition;
+  -webkit-transition: $transition;
+  transition:         $transition;
+}
+@mixin transition-property($property...) {
+  -moz-transition-property:    $property;
+  -o-transition-property:      $property;
+  -webkit-transition-property: $property;
+  transition-property:         $property;
+}
+@mixin transition-duration($duration...) {
+  -moz-transition-property:    $duration;
+  -o-transition-property:      $duration;
+  -webkit-transition-property: $duration;
+  transition-property:         $duration;
+}
+
+// Transform mixins
+@mixin transform($transform) {
+  -webkit-transform: $transform;
+  transform: $transform;
+}
+
+//border  mixins
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+  background-clip: padding-box;  /* stops bg color from leaking outside the border: */
+}
+
+// Single side border-radius
+
+@mixin border-top-radius($radius) {
+  -webkit-border-top-right-radius: $radius;
+  border-top-right-radius: $radius;
+  -webkit-border-top-left-radius: $radius;
+  border-top-left-radius: $radius;
+  background-clip: padding-box;
+}
+@mixin border-right-radius($radius) {
+  -webkit-border-bottom-right-radius : $radius;
+  border-bottom-right-radius         : $radius;
+  -webkit-border-top-right-radius    : $radius;
+  border-top-right-radius            : $radius;
+  background-clip                    : padding-box;
+}
+@mixin border-bottom-radius($radius) {
+  -webkit-border-bottom-right-radius : $radius;
+  border-bottom-right-radius         : $radius;
+  -webkit-border-bottom-left-radius  : $radius;
+  border-bottom-left-radius          : $radius;
+  background-clip                    : padding-box;
+}
+@mixin border-left-radius($radius) {
+  -webkit-border-bottom-left-radius : $radius;
+  border-bottom-left-radius         : $radius;
+  -webkit-border-top-left-radius    : $radius;
+  border-top-left-radius            : $radius;
+  background-clip                   : padding-box;
+}
+
+//SHAPES
+@mixin circle($size) {
+  @include border-radius(50%);
+  width: $size;
+  height: $size;
+}
+
+
+// OPACITY
+@mixin opacity($percentage) {
+  $opacity-ie: $percentage * 100;
+
+  /* IE 8 */
+
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" + $opacity-ie + ")";
+
+  /* IE 5-7 */
+  filter: alpha(opacity=$opacity-ie); //IE8
+
+  /* Netscape */
+  -moz-opacity: $percentage;
+
+  /* Safari 1.x */
+  -khtml-opacity: $percentage;
+
+  /* Good browsers */
+  opacity: $percentage !important;
+}
+
+// Shadow
+@mixin box-shadow($shadow...) {
+  -webkit-box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  box-shadow: $shadow;
+}
+
+@mixin text-shadow($shadow...) {
+  text-shadow: $shadow;
+}
+
+// MEDIA QUERIES
+
+/*
+$bp-small : 24em;
+$bp-small-2 : 29.75em;
+$bp-small-3 : 39.8em;
+$bp-med : 46.8em;
+$bp-med-2 : 48em;
+$bp-large : 50em;
+$bp-large-2 : 54.5em;
+$bp-xl : 60em;
+$bp-xl-2 : 67em;
+*/
+@mixin breakpoint($point) {
+  @if $point == bp-small {
+    @media (max-width: 24em) { @content; }
+  }
+
+  @else if $point == bp-small-3  {
+    @media (max-width: 39.8em) { @content; }
+  }
+
+  @else if $point == bp-med  {
+    @media (max-width: 46.8em) { @content; }
+  }
+
+  @else if $point == bp-large-2  {
+    @media (max-width: 46.8em) { @content; }
+  }
+
+  @else if $point == bp-xl  {
+    @media (max-width: 60em) { @content; }
+  }
+
+  @else if $point == bp-xl-2  {
+    @media (max-width: 67em) { @content; }
+  }
+}
+
+
+// general classes
+%reset-bootstrap-padding {
+  padding: 0 !important;
+}
+
+.clear-padding {
+  @extend %reset-bootstrap-padding;
+}

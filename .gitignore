@@ -29,9 +29,40 @@ build/Release
 # Dependency directories
 node_modules
 jspm_packages
+npm-debug.log
 
 # Optional npm cache directory
 .npm
 
 # Optional REPL history
 .node_repl_history
+
+#Sublime
+*.sublime-project
+*.sublime-workspace
+.sublime-grunt.cache
+
+#webstorm
+.idea
+.idea/atlassian-ide-plugin.xml
+.idea/vcs.xml
+.idea/workspace.xml
+
+#visual studio code
+.vscode
+.vscode/launch.json
+.vscode/settings.json
+
+#production
+www/
+www/js
+www/css
+www/index.html
+platforms/
+plugins/
+*.swp
+.DS_Store
+Thumbs.db
+
+#test
+_reports/
