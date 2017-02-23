@@ -29,6 +29,20 @@
   @return map-get(map-get($palette, contrast), $hue);
 }
 
+@mixin place-holder-color($color) {
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: $color;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: $color;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: $color;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: $color;
+  }
+}
 
 //size mixins
 @mixin set-size($width: 0, $height: 0, $isBlock: false, $isclear: false) {
@@ -127,7 +141,6 @@
 }
 
 // Single side border-radius
-
 @mixin border-top-radius($radius) {
   -webkit-border-top-right-radius: $radius;
   border-top-right-radius: $radius;
@@ -155,6 +168,38 @@
   -webkit-border-top-left-radius    : $radius;
   border-top-left-radius            : $radius;
   background-clip                   : padding-box;
+}
+
+// animation
+@mixin animation($name, $duration, $iteration, $timing-function: inherit, $direction: inherit, $delay: 0) {
+  -webkit-animation-name:             $name;
+  -webkit-animation-duration:         $duration;
+  -webkit-animation-iteration-count:  $iteration;
+  -webkit-animation-timing-function: $timing-function;
+  -webkit-animation-direction: $direction;
+  -webkit-animation-delay: $delay;
+
+  animation-name: $name;
+  animation-duration: $duration;
+  animation-iteration-count: $iteration;
+  animation-timing-function: $timing-function;
+  animation-direction: $direction;
+  animation-delay: $delay;
+}
+
+@mixin keyframes($animationName) {
+  @-webkit-keyframes #{$animationName} {
+    @content;
+  }
+  @-moz-keyframes #{$animationName} {
+    @content;
+  }
+  @-o-keyframes #{$animationName} {
+    @content;
+  }
+  @keyframes #{$animationName} {
+    @content;
+  }
 }
 
 //SHAPES
